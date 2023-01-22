@@ -2,6 +2,7 @@ package pl.edu.s26435bank.AccountService;
 
 
 import org.springframework.stereotype.Service;
+import pl.edu.s26435bank.Exceptions.DataBaseException;
 import pl.edu.s26435bank.Exceptions.DeclinedException;
 import pl.edu.s26435bank.Exceptions.ValidationException;
 import pl.edu.s26435bank.Model.Account;
@@ -29,13 +30,12 @@ public class AccountService {
         try{
             accountRepository.createNewAccount(account);
         }catch (Exception e){
-            throw new DataFormatException("Database error: " + e);
+            throw new DataBaseException("Database error: " + e);
         }
     }
 
     public Optional<Account>findByAccountByNumber(int number){
-        Optional<Account> account = accountRepository.findByAccountNumber(number);
-        return account;
+        return accountRepository.findByAccountNumber(number);
     }
 
     public void decreaseBalance(int id, int amount) throws DeclinedException {
@@ -44,10 +44,6 @@ public class AccountService {
 
     public void increaseBalance(int id, int amount){
         accountRepository.increase(id, amount);
-    }
-
-    public List<Account> getList(){
-        return accountRepository.findAll();
     }
 
     private boolean isInvalid(String attribute) {
