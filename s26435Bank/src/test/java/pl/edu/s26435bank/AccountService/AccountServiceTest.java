@@ -36,7 +36,7 @@ class AccountServiceTest {
         accountService.createNewAccount(account);
         assertNotNull(accountService.findByAccountByNumber(2137));
     }
-
+    
     private static Stream<Arguments> provideInvalidAccount() {
         return Stream.of(
                 Arguments.of(new Account("Jan", null, 2137, 1)),

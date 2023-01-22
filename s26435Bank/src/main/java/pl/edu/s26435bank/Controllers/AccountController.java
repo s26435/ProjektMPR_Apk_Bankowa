@@ -31,7 +31,7 @@ public class AccountController {
         }
         return ResponseEntity.ok(account);
     }
-    @PostMapping//wypłać pieniążki
+    @PostMapping("/moneyout")//wypłać pieniążki
     public ResponseEntity<Object> getMoneyOut(@RequestParam(name = "accountNumber") int accountNumber, @RequestParam(name = "amount")  int amount){
         try {
             service.decreaseBalance(accountNumber,amount);
@@ -43,7 +43,7 @@ public class AccountController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping//wpłać pieniążki
+    @PostMapping("/moneyin")//wpłać pieniążki
     public ResponseEntity putMoneyIn(@RequestParam(name = "accountNumber") int accountNumber, @RequestParam(name = "amount")  int amount){
         try {
             service.increaseBalance(accountNumber, amount);
